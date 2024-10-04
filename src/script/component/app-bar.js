@@ -18,17 +18,25 @@ class AppBar extends HTMLElement {
           box-sizing: border-box;
         }
         :host {
-          display: block;
-          width: 100%;
-          background-color: #00A9FF;
-          color: black;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          display: flex;
           justify-content: center;
           align-items: center;
+          width: 100%;
+          background: linear-gradient(90deg, #00A9FF, #007BFF);
+          color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         h2 {
-          padding: 16px;
+          padding: 16px 24px;
           font-family: 'Mochiy Pop One', sans-serif;
+          font-size: 24px;
+          text-align: center;
+          letter-spacing: 1.2px;
+        }
+        @media (max-width: 768px) {
+          h2 {
+            font-size: 20px;
+          }
         }
       </style>
       

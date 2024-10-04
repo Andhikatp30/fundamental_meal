@@ -1,8 +1,7 @@
 class SearchBar extends HTMLElement {
-
   constructor() {
     super();
-    this.shadowDOM = this.attachShadow({mode: 'open'});
+    this.shadowDOM = this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -14,59 +13,74 @@ class SearchBar extends HTMLElement {
     this.render();
   }
 
-
   get value() {
-    return this.shadowDOM.querySelector('#searchElement').value;
+    return this.shadowDOM.querySelector("#searchElement").value;
   }
 
   render() {
     this.shadowDOM.innerHTML = `
       <style>
         .search-container {
-          max-width: 800px;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          max-width: 100%;
+          width: 800px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           padding: 16px;
-          border-radius: 5px;
+          border-radius: 12px;
           display: flex;
-          position: sticky;
-          top: 10px;
-          background-color: #A0E9FF;
-          border-radius: 10px;
+          align-items: center;
+          justify-content: space-between;
+          background-color: #ffffff;
+          margin: 10px auto;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .search-container:hover {
+          background-color: #f0f8ff;
+          transform: translateY(-3px);
         }
         .search-container > input {
-          width: 75%;
-          padding: 16px;
-          border: 0;
-          border-bottom: 1px solid cornflowerblue;
-          font-weight: bold;
-          border-radius: 10px;
+          flex: 1;
+          padding: 12px 20px;
+          border: none;
+          border-bottom: 2px solid #00A9FF;
+          font-size: 1rem;
+          color: #333;
+          border-radius: 8px;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .search-container > input:focus {
-          outline: 0;
-          border-bottom: 2px solid cornflowerblue;
+          outline: none;
+          border-color: #007BFF;
+          box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
         }
-        .search-container > input:focus::placeholder {
-          font-weight: bold;
-        }
-        .search-container >  input::placeholder {
-          color: #687EFF;
-          font-weight: bold;
+        .search-container > input::placeholder {
+          color: #999;
+          font-size: 1rem;
         }
         .search-container > button {
-          width: 23%;
-          cursor: pointer;
-          margin-left: auto;
-          padding: 16px;
-          background-color: #00A9FF;
+          padding: 12px 20px;
+          margin-left: 16px;
+          background-color: #007BFF;
           color: white;
-          border: 0;
+          border: none;
+          font-size: 1rem;
+          font-weight: bold;
           text-transform: uppercase;
-          border-radius: 10px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        @media screen and (max-width: 550px) {
+        .search-container > button:hover {
+          background-color: #0056b3;
+          transform: translateY(-2px);
+        }
+        .search-container > button:active {
+          background-color: #003f7f;
+          transform: translateY(1px);
+        }
+        @media screen and (max-width: 768px) {
           .search-container {
             flex-direction: column;
-            position: static;
+            padding: 20px;
           }
           .search-container > input {
             width: 100%;
@@ -74,6 +88,7 @@ class SearchBar extends HTMLElement {
           }
           .search-container > button {
             width: 100%;
+            margin-left: 0;
           }
         }
       </style>
@@ -84,9 +99,10 @@ class SearchBar extends HTMLElement {
       </div>
     `;
 
-    this.shadowDOM.querySelector('#searchButtonElement')
-        .addEventListener('click', this._clickEvent);
+    this.shadowDOM
+      .querySelector("#searchButtonElement")
+      .addEventListener("click", this._clickEvent);
   }
 }
 
-customElements.define('search-bar', SearchBar);
+customElements.define("search-bar", SearchBar);
