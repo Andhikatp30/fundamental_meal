@@ -1,8 +1,14 @@
+const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'production',
+  output: {
+    filename: '[name].[contenthash].js',  // Use contenthash for better caching
+    path: path.resolve(__dirname, 'dist'), // Output to 'dist' folder
+    clean: true,  // Ensure old files are cleaned up in the dist folder
+  },
   module: {
     rules: [
       {
@@ -18,5 +24,8 @@ module.exports = merge(common, {
         ],
       },
     ],
+  },
+  optimization: {
+    minimize: true, // Minimize JS for production
   },
 });
